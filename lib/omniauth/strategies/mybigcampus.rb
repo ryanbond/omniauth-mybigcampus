@@ -3,47 +3,33 @@ require 'multi_json'
 
 module OmniAuth
   module Strategies
-    class Mybigcampus < OmniAuth::Strategies::OAuth
-      option :name, 'mybigcampus'
-      option :client_options, {:authorize_path => '/oauth/authenticate',
-                               :site => 'https://api.mybigcampus.com'}
+    class Mybigcampus < OmniAuth::Strategies::OAuth2
+      option :name, :mybigcampus
+      option :client_options, {:authorize_path => '/oauth/authorize',
+                               :site => 'http://api.mybigcampus.com'}
 
-      uid { access_token.params[:user_id] }
+      uid { raw_info["id"] }
 
       info do
         {
-          :nickname => raw_info['screen_name'],
+          :screen_name => raw_info['screen_name'],
           :first_name => raw_info['first_name'],
           :last_name => raw_info['last_name'],
-          :image => raw_info['profile_image_url'],
+          :image => raw_info['photo_url_thumb'],
+          :email => raw_info['email'],
           :urls => {
-            'Website' => raw_info['url'],
-            'MyBigCampus' => 'http://www.mybigcampus.com/users/' + raw_info['screen_name'],
+            'profile' => 'http://www.mybigcampus.com/users/' + raw_info['screen_name']
           }
         }
       end
 
-      extra do
-        { :raw_info => raw_info }
-      end
-
       def raw_info
-        @raw_info ||= MultiJson.decode(access_token.get('/v1/users/verify_credentials.json').body)
+        @raw_info ||= access_token.get('/v1/credentials/verify.json').parsed
+        puts @raw_info.inspect
+        @raw_info
       rescue ::Errno::ETIMEDOUT
         raise ::Timeout::Error
       end
-
-      alias :old_request_phase :request_phase
-
-      def request_phase 
-        screen_name = session['omniauth.params']['screen_name']
-        if screen_name && !screen_name.empty?
-          options[:authorize_params] ||= {}
-          options[:authorize_params].merge!(:force_login => 'true', :screen_name => screen_name)
-        end
-        old_request_phase
-      end
-
 
     end
   end

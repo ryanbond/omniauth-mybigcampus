@@ -1,16 +1,16 @@
-# OmniAuth My Big Campus
+# OmniAuth for My Big Campus
 
 This gem contains the My Big Campus strategy for OmniAuth.
 
-My Big Campus uses the OAuth 1.0a flow.
+My Big Campus uses the OAuth 2.0 flow.
 
 ## How To Use It
 
-Usage is as per any other OmniAuth 1.0 strategy. So let's say you're using Rails, you need to add the strategy to your `Gemfile`:
+Usage is as per any other OmniAuth 2.0 strategy. If you are using Rails, you need to add the strategy to your `Gemfile`:
 
     gem 'omniauth-mybigcampus'
 
-You can pull them in directly from github e.g.:
+You can pull it directly from github via:
 
     gem 'omniauth-mybigcampus', :git => 'https://github.com/ryanbond/omniauth-mybigcampus.git'
 
@@ -24,7 +24,7 @@ Now just follow the README at: https://github.com/intridea/omniauth
 
 ## Supported Rubies
 
-OmniAuth My Big Campus is tested under 1.8.7, 1.9.2, 1.9.3 and Ruby Enterprise Edition.
+OmniAuth for My Big Campus is tested under 1.8.7, 1.9.2, 1.9.3 and Ruby Enterprise Edition.
 
 ## Note on Patches/Pull Requests
 
