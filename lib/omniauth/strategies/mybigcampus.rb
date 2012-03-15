@@ -25,8 +25,6 @@ module OmniAuth
 
       def raw_info
         @raw_info ||= access_token.get('/v1/credentials/verify.json').parsed
-        puts @raw_info.inspect
-        @raw_info
       rescue ::Errno::ETIMEDOUT
         raise ::Timeout::Error
       end
