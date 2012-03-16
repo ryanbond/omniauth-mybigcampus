@@ -15,10 +15,10 @@ module OmniAuth
           :screen_name => raw_info['screen_name'],
           :first_name => raw_info['first_name'],
           :last_name => raw_info['last_name'],
-          :image => raw_info['photo_url_thumb'],
           :email => raw_info['email'],
           :urls => {
-            'profile' => 'http://www.mybigcampus.com/users/' + raw_info['screen_name']
+            :profile => "http://www.mybigcampus.com/users/#{raw_info['screen_name']}",
+            :image => "http://www.mybigcampus.com#{raw_info['photo_url_thumb']}"
           }
         }
       end
