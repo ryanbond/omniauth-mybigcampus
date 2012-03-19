@@ -6,7 +6,7 @@ module OmniAuth
     class Mybigcampus < OmniAuth::Strategies::OAuth2
       option :name, :mybigcampus
       option :client_options, {:authorize_path => '/oauth/authorize',
-                               :site => 'http://api.mybigcampus.com'}
+                               :site => 'http://www.mybigcampus.com'}
 
       uid { raw_info["id"] }
 
