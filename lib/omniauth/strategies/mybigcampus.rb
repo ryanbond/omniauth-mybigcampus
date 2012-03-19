@@ -12,10 +12,12 @@ module OmniAuth
 
       info do
         {
-          :screen_name => raw_info['screen_name'],
+          :name => raw_info['full_name'],
+          :nickname => raw_info['screen_name'],
           :first_name => raw_info['first_name'],
           :last_name => raw_info['last_name'],
           :email => raw_info['email'],
+          :user_type => raw_info['user_type']
           :urls => {
             :profile => "http://www.mybigcampus.com/users/#{raw_info['screen_name']}",
             :image => "http://www.mybigcampus.com#{raw_info['photo_url_thumb']}"
